@@ -5,11 +5,30 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio</title>
-    <base href="https://bwagner-dev.github.io/Benjamin-Wagner-Portfolio/" />
+    <base id="dynamic-base" href="/">
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" href="css/app.css" />
     <link rel="icon" type="image/png" href="favicon.png" />
     <link href="Portfolio.styles.css" rel="stylesheet" />
+
+    <script>
+        (function () {
+            const base = document.getElementById('dynamic-base') || document.createElement('base');
+            base.setAttribute('id', 'dynamic-base');
+
+            const hostname = window.location.hostname;
+            const isLocal = hostname === 'localhost' || hostname === '127.0.0.1';
+
+            const repoName = 'Benjamin-Wagner-Portfolio';
+
+            const baseHref = isLocal ? '/' : `/${repoName}/`;
+            base.setAttribute('href', baseHref);
+
+            if (!document.head.contains(base)) {
+                document.head.prepend(base);
+            }
+        })();
+    </script>
 </head>
 
 <body>
@@ -26,6 +45,7 @@
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
+
     <script src="_framework/blazor.webassembly.js"></script>
 </body>
 
